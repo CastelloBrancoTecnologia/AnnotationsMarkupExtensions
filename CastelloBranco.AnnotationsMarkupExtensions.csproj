@@ -7,7 +7,7 @@
 		net8.0-android;
 		net8.0-windows10.0.19041;
 		net8.0-browserwasm;
-		net8.0-desktop
+		net8.0-desktop;
 	</TargetFrameworks>
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
@@ -25,12 +25,12 @@
 	  <RootNamespace>CastelloBranco.AnnotationsMarkupExtensions</RootNamespace>
 	  <SignAssembly>False</SignAssembly>
 	  <Company>Castello Branco Tecnologia</Company>
-	  <Product>CastelloBranco.StringExtensions</Product>
-	  <Version>1.0.0</Version>
+	  <Product>CastelloBranco.AnnotationsMarkupExtensions</Product>
+	  <Version>1.0.1</Version>
 	  <PackageProjectUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions</PackageProjectUrl>
-	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageReadmeFile></PackageReadmeFile>
 	  <RepositoryUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions</RepositoryUrl>
-	  <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	  <AssemblyVersion>2410.7.2133.9</AssemblyVersion>
 
 	  <!--
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
@@ -70,6 +70,13 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="LICENSE.txt">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 	
 	<Target Name="PushNuGetPackage" AfterTargets="GenerateNuspec">

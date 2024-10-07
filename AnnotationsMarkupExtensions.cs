@@ -10,16 +10,10 @@ using System.ComponentModel;
 
 namespace CastelloBranco.AnnotationsMarkupExtensions;
 
-public class AnnotateExtension : MarkupExtension
+public class AnnotateExtension(string propertyName, MarkupAnnotationEnum annotation) : MarkupExtension
 {
-    public string PropertyName { get; set; }
-    public MarkupAnnotationEnum Annotation { get; set; }
-
-    public AnnotateExtension(string propertyName, MarkupAnnotationEnum annotation)
-    {
-        PropertyName = propertyName;
-        Annotation = annotation;
-    }
+    public string PropertyName { get; set; } = propertyName;
+    public MarkupAnnotationEnum Annotation { get; set; } = annotation;
 
     protected override object? ProvideValue(IXamlServiceProvider serviceProvider)
     {
@@ -35,15 +29,10 @@ public class AnnotateExtension : MarkupExtension
 
                     PropertyInfo prop = type.GetProperty(PropertyName) ?? throw new Exception($"Propriedade {PropertyName} nao encontrada");
                     
-                    string fieldName = char.ToLower(PropertyName[0]) + PropertyName.[1..]);
+                    string fieldName = $"{char.ToLower(PropertyName[0])}{PropertyName [1..]}";
 
-                    FieldInfo? field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-
-                    if (field == null)
-                    {
-                        field = type.GetField($"_{PropertyName}", BindingFlags.NonPublic | BindingFlags.Instance);
-                    }
-
+                    FieldInfo? field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance) ?? type.GetField($"_{PropertyName}", BindingFlags.NonPublic | BindingFlags.Instance);
+                    
                     return ExtractAnnotation(prop, field);
                 }
             }
@@ -73,10 +62,10 @@ public class AnnotateExtension : MarkupExtension
                 return placeholderAttr?.Prompt;
 
             case MarkupAnnotationEnum.MaxLength:
-                return GetMaxLength(prop, field);
+                return AnnotateExtension.GetMaxLength(prop, field);
 
             case MarkupAnnotationEnum.MinLength:
-                return GetMinLength(prop, field);
+                return AnnotateExtension.GetMinLength(prop, field);
 
             case MarkupAnnotationEnum.MaxValue:
                 var rangeAttrMax = prop?.GetCustomAttributes<RangeAttribute>(true).FirstOrDefault()
@@ -126,7 +115,7 @@ public class AnnotateExtension : MarkupExtension
         }
     }
 
-    private int GetMaxLength(PropertyInfo prop, FieldInfo? field)
+    private static int GetMaxLength(PropertyInfo prop, FieldInfo? field)
     {
         var stringLengthAttr = prop?.GetCustomAttributes<StringLengthAttribute>(true).FirstOrDefault()
                             ?? field?.GetCustomAttributes<StringLengthAttribute>(true).FirstOrDefault();
@@ -143,7 +132,7 @@ public class AnnotateExtension : MarkupExtension
                       0);
     }
 
-    private int GetMinLength(PropertyInfo prop, FieldInfo? field)
+    private static int GetMinLength(PropertyInfo prop, FieldInfo? field)
     {
         var stringLengthAttr = prop?.GetCustomAttributes<StringLengthAttribute>(true).FirstOrDefault()
                             ?? field?.GetCustomAttributes<StringLengthAttribute>(true).FirstOrDefault();
@@ -191,7 +180,7 @@ public class AnnotateExtension : MarkupExtension
 
     private static InputScope GetBestInputScope(PropertyInfo? prop, DataTypeAttribute? dataTypeAttr, string? dataFormat)
     {
-        InputScope scope = new InputScope();
+        InputScope scope = new();
 
         if (dataTypeAttr != null && InputScopesOfDataTypes.TryGetValue(dataTypeAttr.DataType, out var inputScopeValue))
         {
@@ -202,14 +191,13 @@ public class AnnotateExtension : MarkupExtension
 
         if (prop != null)
         {
-            foreach (var validatorType in InputScopesOfValidators.Keys)
-            {
-                if (prop.GetCustomAttributes(validatorType, true).Any())
-                {
-                    scope.Names.Add(new InputScopeName { NameValue = InputScopesOfValidators[validatorType] });
+            var validatorType = InputScopesOfValidators.Keys.FirstOrDefault(vt => prop.GetCustomAttributes(vt, true).Length != 0);
 
-                    return scope;
-                }
+            if (validatorType != null)
+            {
+                scope.Names.Add(new InputScopeName { NameValue = InputScopesOfValidators[validatorType] });
+
+                return scope;
             }
         }
 
