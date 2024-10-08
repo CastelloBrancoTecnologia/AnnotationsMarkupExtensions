@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Microsoft.UI.Xaml.Input;
 using System.ComponentModel;
 
+using CastelloBranco.DataAnnotations;
+
 namespace CastelloBranco.AnnotationsMarkupExtensions;
 
 public class AnnotateExtension(string propertyName, MarkupAnnotationEnum annotation) : MarkupExtension
@@ -28,11 +30,15 @@ public class AnnotateExtension(string propertyName, MarkupAnnotationEnum annotat
                     Type type = dataContext.GetType();
 
                     PropertyInfo prop = type.GetProperty(PropertyName) ?? throw new Exception($"Propriedade {PropertyName} nao encontrada");
-                    
+
+                    // lowerCamel, _lowerCamel or m_lowerCamel
+
                     string fieldName = $"{char.ToLower(PropertyName[0])}{PropertyName [1..]}";
 
-                    FieldInfo? field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance) ?? type.GetField($"_{PropertyName}", BindingFlags.NonPublic | BindingFlags.Instance);
-                    
+                    FieldInfo? field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance) ?? 
+                                       type.GetField($"_{fieldName}", BindingFlags.NonPublic | BindingFlags.Instance) ??
+                                       type.GetField($"m_{fieldName}", BindingFlags.NonPublic | BindingFlags.Instance);
+
                     return ExtractAnnotation(prop, field);
                 }
             }
@@ -86,11 +92,11 @@ public class AnnotateExtension(string propertyName, MarkupAnnotationEnum annotat
                 return displayFormatAttr?.DataFormatString;
 
             case MarkupAnnotationEnum.CharacterCasing:
-                bool isUpperCase = prop?.GetCustomAttributes(true).Any(x => x.GetType().Name.Contains("UpperCase", StringComparison.InvariantCultureIgnoreCase))
-                                   ?? field?.GetCustomAttributes(true).Any(x => x.GetType().Name.Contains("UpperCase", StringComparison.InvariantCultureIgnoreCase)) ?? false;
+                bool isUpperCase = prop?.GetCustomAttributes<UpperCaseAttribute>(true).Any () 
+                                   ?? field?.GetCustomAttributes<UpperCaseAttribute>(true).Any() ?? false;
 
-                bool isLowerCase =     prop?.GetCustomAttributes(true).Any(x => x.GetType().Name.Contains("LowerCase", StringComparison.InvariantCultureIgnoreCase))
-                                   ?? field?.GetCustomAttributes(true).Any(x => x.GetType().Name.Contains("LowerCase", StringComparison.InvariantCultureIgnoreCase)) ?? false;
+                bool isLowerCase = prop?.GetCustomAttributes<LowerCaseAttribute>(true).Any()
+                                   ?? field?.GetCustomAttributes<LowerCaseAttribute>(true).Any() ?? false;
 
                 if (isUpperCase) return CharacterCasing.Upper;
                 if (isLowerCase) return CharacterCasing.Lower;
@@ -109,6 +115,12 @@ public class AnnotateExtension(string propertyName, MarkupAnnotationEnum annotat
                                  ?? field?.GetCustomAttributes<DisplayFormatAttribute>(true).FirstOrDefault();
 
                     return GetBestInputScope(prop, dataTypeAttr, dfAttr?.DataFormatString);
+
+            case MarkupAnnotationEnum.Mask:
+                var maskAttr = prop?.GetCustomAttributes<MaskAttribute>(true).FirstOrDefault()
+                                      ?? field?.GetCustomAttributes<MaskAttribute>(true).FirstOrDefault();
+
+                return maskAttr?.Mask;
 
             default:
                 return null;
@@ -151,11 +163,20 @@ public class AnnotateExtension(string propertyName, MarkupAnnotationEnum annotat
 
     private static Dictionary<Type, InputScopeNameValue> InputScopesOfValidators { get; } = new Dictionary<Type, InputScopeNameValue>
     {
+        { typeof (AgeRangeAttribute), InputScopeNameValue.Digits},
+        { typeof (CEPAttribute), InputScopeNameValue.Digits},
+        { typeof (CNPJAttribute), InputScopeNameValue.Digits},
+        { typeof (CPFAttribute), InputScopeNameValue.Digits},
+        { typeof (DateTimeOffsetAttribute), InputScopeNameValue.Digits},
+        { typeof (SiglaEstadoBrasileiroAttribute), InputScopeNameValue.Text},
+        { typeof (SiglaPaisAttribute), InputScopeNameValue.Text},
         { typeof(EmailAddressAttribute), InputScopeNameValue.EmailNameOrAddress },
         { typeof(UrlAttribute), InputScopeNameValue.Url },
         { typeof(CreditCardAttribute), InputScopeNameValue.NumberFullWidth },
-        { typeof(PhoneAttribute), InputScopeNameValue.NumberFullWidth },
-        // { typeof(FullNameAttribute), InputScopeNameValue.PersonalFullName },
+        { typeof(PhoneAttribute), InputScopeNameValue.TelephoneNumber },
+        { typeof (AreaCodeAttribute), InputScopeNameValue.TelephoneAreaCode},
+        { typeof (CountryCodeAttribute), InputScopeNameValue.TelephoneCountryCode},
+        { typeof(FullNameAttribute), InputScopeNameValue.PersonalFullName },
     };
 
     private static Dictionary<DataType, InputScopeNameValue> InputScopesOfDataTypes { get; } = new Dictionary<DataType, InputScopeNameValue>
@@ -234,5 +255,6 @@ public enum MarkupAnnotationEnum
     IsReadOnly,
     CharacterCasing,
     BestInputScope,
+    Mask
 }
 

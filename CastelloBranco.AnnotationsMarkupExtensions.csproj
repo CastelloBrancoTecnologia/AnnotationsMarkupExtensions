@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
     <TargetFrameworks>
-		net8.0;
+		net8.0; 
 		net8.0-ios;
 		net8.0-maccatalyst;
 		net8.0-android;
@@ -26,7 +26,7 @@
 	  <SignAssembly>False</SignAssembly>
 	  <Company>Castello Branco Tecnologia</Company>
 	  <Product>CastelloBranco.AnnotationsMarkupExtensions</Product>
-	  <Version>1.0.1</Version>
+	  <Version>1.0.2</Version>
 	  <PackageProjectUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions</PackageProjectUrl>
 	  <PackageReadmeFile></PackageReadmeFile>
 	  <RepositoryUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions</RepositoryUrl>
@@ -69,6 +69,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CastelloBranco.DataAnnotations" Version="3.0.0.10" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 	</ItemGroup>
 
