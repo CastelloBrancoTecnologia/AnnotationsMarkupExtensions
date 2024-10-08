@@ -32,7 +32,17 @@ This project provides a WinUI 3 MarkupExtension called AnnotateExtension to bind
 
 - This project is licensed under the MIT License.
 
-Example ViewModel
+# Installation & Usage
+
+- Add the AnnotateExtension package https://www.nuget.org/packages/CastelloBranco.AnnotationsMarkupExtensions to your WinUI 3 project. -
+
+- Annotate your ViewModel properties using attributes like [Display], [StringLength], [Range], [Required], etc.
+
+ - Use the AnnotateExtension in XAML to bind UI properties like Header, MaxLength, and PlaceholderText directly from the ViewModel.
+
+   With this setup, you can automatically keep your UI and data logic in sync using the power of data annotations and the flexibility of WinUI 3.
+
+# Example ViewModel
 
 Here is an example of a SignInViewModel using CommunityToolkit.MVVM. 
 
@@ -146,16 +156,6 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
     </StackPanel>
 </Page>
 ```
-
-# Installation & Usage
-
-- Add the AnnotateExtension package https://www.nuget.org/packages/CastelloBranco.AnnotationsMarkupExtensions to your WinUI 3 project. -
-
-- Annotate your ViewModel properties using attributes like [Display], [StringLength], [Range], [Required], etc.
-
- - Use the AnnotateExtension in XAML to bind UI properties like Header, MaxLength, and PlaceholderText directly from the ViewModel.
-
-With this setup, you can automatically keep your UI and data logic in sync using the power of data annotations and the flexibility of WinUI 3.
 
 
 
