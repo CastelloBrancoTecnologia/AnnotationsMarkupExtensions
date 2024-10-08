@@ -149,10 +149,13 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
 
 # Installation & Usage
 
-- Add the AnnotateExtension package  to your WinUI 3 project. -
+- Add the AnnotateExtension package https://www.nuget.org/packages/CastelloBranco.AnnotationsMarkupExtensions to your WinUI 3 project. -
 
 - Annotate your ViewModel properties using attributes like [Display], [StringLength], [Range], [Required], etc.
 
  - Use the AnnotateExtension in XAML to bind UI properties like Header, MaxLength, and PlaceholderText directly from the ViewModel.
+
+
+
 
 With this setup, you can automatically keep your UI and data logic in sync using the power of data annotations and the flexibility of WinUI 3.
