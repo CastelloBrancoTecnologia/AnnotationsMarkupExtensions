@@ -14,19 +14,19 @@ This project provides a WinUI 3 MarkupExtension called AnnotateExtension to bind
 
 # Supported Annotations / Atttributes
 
-    - DisplayName      => Get value from DisplayAttribute applyed to Property  
-    - ShortDisplayName => Get value from DisplayAttribute applyed to Property 
-    - Description      => Get value from DisplayAttribute applyed to Property 
-    - MaxLength        => Get value from LengthAttribute, StrinLengthAttribute ou MaxLengthAttribute applyed to Property  
-    - MinLength        => Get value from LengthAttribute, StrinLengthAttribute ou MinLengthAttribute applyed to Property 
-    - MaxValue         => Get value from RangeAttribute applyed to Property 
-    - MinValue         => Get value from Get value from RangeAttribute applyed to Property 
-    - Prompt           => Get value from DisplayAttribute applyed to Property   
-    - DisplayFormat    => Get value from DisplayFormatAttribute applyed to Property 
-    - IsReadOnly       => Get value from ReadOnlyAttribute applyed to Property 
+    - DisplayName      => Binds to the DisplayAttribute Name applyed to Property  
+    - ShortDisplayName => Binds to the DisplayAttribute ShortName3 applyed to Property 
+    - Description      => Binds to the DisplayAttribute Description applyed to Property 
+    - MaxLength        => Binds to the LengthAttribute, StrinLengthAttribute ou MaxLengthAttribute applyed to Property  
+    - MinLength        => Binds to the LengthAttribute, StrinLengthAttribute ou MinLengthAttribute applyed to Property 
+    - MaxValue         => Binds to the RangeAttribute applyed to Property 
+    - MinValue         => Binds to the RangeAttribute applyed to Property 
+    - Prompt           => Binds to the DisplayAttribute Prompt applyed to Property   
+    - DisplayFormat    => Binds to the DisplayFormatAttribute applyed to Property 
+    - IsReadOnly       => Binds to the  ReadOnlyAttribute applyed to Property 
     - CharacterCasing  => get TextBox.CaracterCasing value from UpperCaseAttribute or LowerCaseAttribute 
-    - BestInputScope   => Calulate InputScope value based on datatype and validator applyed to Property 
-    - Mask             => Get value from MaskAttribute applyed to Property  
+    - BestInputScope   => Automatically chooses the best input scope based on data types and validators applyed to Property 
+    - Mask             => Binds to the MaskAttribute applyed to Property  
 
 # License
 
@@ -146,18 +146,6 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
     </StackPanel>
 </Page>
 ```
-
-# Key Features in XAML:
-
-- Header: Binds to the Display(Name) attribute from the ViewModel.
-
-- Description: Binds to the Display(Description) attribute.
-
-- PlaceholderText: Binds to the Display(Prompt) attribute.
-
-- MaxLength: Binds to the MaxLength or StringLength annotation.
-
-- InputScope: Automatically chooses the best input scope based on data types like Email, Password, or custom logic.
 
 # Installation & Usage
 
