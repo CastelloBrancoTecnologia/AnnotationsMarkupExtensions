@@ -12,6 +12,22 @@ This project provides a WinUI 3 MarkupExtension called AnnotateExtension to bind
 
 - Built-in logic for setting InputScope based on data annotations like EmailAddress, Password, Phone, etc.
 
+# Supported Annotations / Atttributes
+
+    - DisplayName      => Get value from DisplayAttribute applyed to Property  
+    - ShortDisplayName => Get value from DisplayAttribute applyed to Property 
+    - Description      => Get value from DisplayAttribute applyed to Property 
+    - MaxLength        => Get value from LengthAttribute, StrinLengthAttribute ou MaxLengthAttribute applyed to Property  
+    - MinLength        => Get value from LengthAttribute, StrinLengthAttribute ou MinLengthAttribute applyed to Property 
+    - MaxValue         => Get value from RangeAttribute applyed to Property 
+    - MinValue         => Get value from Get value from RangeAttribute applyed to Property 
+    - Prompt           => Get value from DisplayAttribute applyed to Property   
+    - DisplayFormat    => Get value from DisplayFormatAttribute applyed to Property 
+    - IsReadOnly       => Get value from ReadOnlyAttribute applyed to Property 
+    - CharacterCasing  => get TextBox.CaracterCasing value from UpperCaseAttribute or LowerCaseAttribute 
+    - BestInputScope   => Calulate InputScope value based on datatype and validator applyed to Property 
+    - Mask             => Get value from MaskAttribute applyed to Property  
+
 # License
 
 - This project is licensed under the MIT License.
