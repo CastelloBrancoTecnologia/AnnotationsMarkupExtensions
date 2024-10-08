@@ -1,4 +1,4 @@
-# WinUI 3 Markup Extension for Annotations
+# WinUI3 / UNO Markup Extension for Annotations
 
 This project provides a WinUI 3 MarkupExtension called AnnotateExtension to bind UI properties (like Header, Description, PlaceHolder, MaxLength, etc.) directly from ViewModel annotations. It allows you to use data annotations on properties in your ViewModel and reflect them in your UI without manual XAML bindings.
 
