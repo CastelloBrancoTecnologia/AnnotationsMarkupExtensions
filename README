@@ -155,7 +155,9 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
 
  - Use the AnnotateExtension in XAML to bind UI properties like Header, MaxLength, and PlaceholderText directly from the ViewModel.
 
-
-
-
 With this setup, you can automatically keep your UI and data logic in sync using the power of data annotations and the flexibility of WinUI 3.
+
+
+
+
+
