@@ -103,7 +103,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <TextBox 
             Header="{y:Annotate Name, Header}" 
             Description="{y:Annotate Name, Description}"
-            PlaceholderText="{y:Annotate Name, PlaceHolder}" 
+            PlaceholderText="{y:Annotate Name, Prompt}" 
             MaxLength="{y:Annotate Name, MaxLength}" 
             InputScope="{y:Annotate Name, BestInputScope}"
             Text="{x:Bind Name, Mode=TwoWay}" />
@@ -112,7 +112,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <TextBox 
             Header="{y:Annotate Username, Header}" 
             Description="{y:Annotate Username, Description}" 
-            PlaceholderText="{y:Annotate Username, PlaceHolder}" 
+            PlaceholderText="{y:Annotate Username, Prompt}" 
             MaxLength="{y:Annotate Username, MaxLength}" 
             InputScope="{y:Annotate Username, BestInputScope}"
             Text="{x:Bind Username, Mode=TwoWay}" />
@@ -121,7 +121,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <PasswordBox 
             Header="{y:Annotate Password, Header}" 
             Description="{y:Annotate Password, Description}" 
-            PlaceholderText="{y:Annotate Password, PlaceHolder}" 
+            PlaceholderText="{y:Annotate Password, Prompt}" 
             MaxLength="{y:Annotate Password, MaxLength}" 
             InputScope="{y:Annotate Password, BestInputScope}"
             Password="{x:Bind Password, Mode=TwoWay}" />
@@ -130,14 +130,14 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <DatePicker 
             Header="{y:Annotate DateOfBirth, Header}" 
             Description="{y:Annotate DateOfBirth, Description}" 
-            PlaceholderText="{y:Annotate DateOfBirth, PlaceHolder}" 
+            PlaceholderText="{y:Annotate DateOfBirth, Prompt}" 
             Date="{x:Bind DateOfBirth, Mode=TwoWay}" />
 
         <!-- Body Height -->
         <TextBox 
             Header="{y:Annotate BodyHeight, Header}" 
             Description="{y:Annotate BodyHeight, Description}" 
-            PlaceholderText="{y:Annotate BodyHeight, PlaceHolder}" 
+            PlaceholderText="{y:Annotate BodyHeight, Prompt}" 
             InputScope="{y:Annotate BodyHeight, BestInputScope}" 
             Text="{x:Bind BodyHeight, Mode=TwoWay}" />
         
