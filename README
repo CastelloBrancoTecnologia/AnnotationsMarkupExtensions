@@ -78,7 +78,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:l="using:YourAppNamespace.ViewModels"
-    xmlns:y="using:YourAppNamespace.MarkupExtensions"
+    xmlns:y="using:CastellloBranco.MarkupExtensions"
     mc:Ignorable="d"
     DataContext="{x:Bind l:SignInViewModel}">
     
