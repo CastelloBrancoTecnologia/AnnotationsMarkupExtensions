@@ -22,7 +22,7 @@ Here is an example of a SignInViewModel using CommunityToolkit.MVVM.
 
 All fields are required, and annotations like MaxLength, MinLength, and Range are used to configure the form behavior.
 
-``csharp
+```csharp
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -63,13 +63,13 @@ public partial class SignInViewModel : ObservableObject
     [Display(Name = "Body Height", Description = "Enter your height in meters", Prompt = "e.g., 1.75")]
     private double _bodyHeight;
 }
-``
+```
 
 XAML Sign-In Form
 
 This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI properties like Header, Description, and Prompt directly from the ViewModel annotations.
 
-``xml
+```xml
 
 <Page
     x:Class="YourAppNamespace.Views.SignInPage"
@@ -129,7 +129,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <Button Content="Submit" Click="OnSubmit"/>
     </StackPanel>
 </Page>
-``
+```
 
 # Key Features in XAML:
 
