@@ -1,4 +1,4 @@
-# WinUI 3 Markup Extension for Annotations
+# WinUI3 / UNO Markup Extension for Annotations
 
 This project provides a WinUI 3 MarkupExtension called AnnotateExtension to bind UI properties (like Header, Description, PlaceHolder, MaxLength, etc.) directly from ViewModel annotations. It allows you to use data annotations on properties in your ViewModel and reflect them in your UI without manual XAML bindings.
 
@@ -12,17 +12,43 @@ This project provides a WinUI 3 MarkupExtension called AnnotateExtension to bind
 
 - Built-in logic for setting InputScope based on data annotations like EmailAddress, Password, Phone, etc.
 
+# Supported Annotations / Atttributes
+
+    - DisplayName      => Binds to the DisplayAttribute Name applyed to Property  
+    - ShortDisplayName => Binds to the DisplayAttribute ShortName3 applyed to Property 
+    - Description      => Binds to the DisplayAttribute Description applyed to Property 
+    - MaxLength        => Binds to the LengthAttribute, StrinLengthAttribute ou MaxLengthAttribute applyed to Property  
+    - MinLength        => Binds to the LengthAttribute, StrinLengthAttribute ou MinLengthAttribute applyed to Property 
+    - MaxValue         => Binds to the RangeAttribute applyed to Property 
+    - MinValue         => Binds to the RangeAttribute applyed to Property 
+    - Prompt           => Binds to the DisplayAttribute Prompt applyed to Property   
+    - DisplayFormat    => Binds to the DisplayFormatAttribute applyed to Property 
+    - IsReadOnly       => Binds to the  ReadOnlyAttribute applyed to Property 
+    - CharacterCasing  => get TextBox.CaracterCasing value from UpperCaseAttribute or LowerCaseAttribute 
+    - BestInputScope   => Automatically chooses the best input scope based on data types and validators applyed to Property 
+    - Mask             => Binds to the MaskAttribute applyed to Property  
+
 # License
 
 - This project is licensed under the MIT License.
 
-Example ViewModel
+# Installation & Usage
+
+- Add the AnnotateExtension package https://www.nuget.org/packages/CastelloBranco.AnnotationsMarkupExtensions to your WinUI 3 project. -
+
+- Annotate your ViewModel properties using attributes like [Display], [StringLength], [Range], [Required], etc.
+
+ - Use the AnnotateExtension in XAML to bind UI properties like Header, MaxLength, and PlaceholderText directly from the ViewModel.
+
+   With this setup, you can automatically keep your UI and data logic in sync using the power of data annotations and the flexibility of WinUI 3.
+
+# Example ViewModel
 
 Here is an example of a SignInViewModel using CommunityToolkit.MVVM. 
 
 All fields are required, and annotations like MaxLength, MinLength, and Range are used to configure the form behavior.
 
-``csharp
+```csharp
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -63,13 +89,13 @@ public partial class SignInViewModel : ObservableObject
     [Display(Name = "Body Height", Description = "Enter your height in meters", Prompt = "e.g., 1.75")]
     private double _bodyHeight;
 }
-``
+```
 
 XAML Sign-In Form
 
 This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI properties like Header, Description, and Prompt directly from the ViewModel annotations.
 
-``xml
+```xml
 
 <Page
     x:Class="YourAppNamespace.Views.SignInPage"
@@ -78,7 +104,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:l="using:YourAppNamespace.ViewModels"
-    xmlns:y="using:YourAppNamespace.MarkupExtensions"
+    xmlns:y="using:CastellloBranco.MarkupExtensions"
     mc:Ignorable="d"
     DataContext="{x:Bind l:SignInViewModel}">
     
@@ -87,7 +113,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <TextBox 
             Header="{y:Annotate Name, Header}" 
             Description="{y:Annotate Name, Description}"
-            PlaceholderText="{y:Annotate Name, PlaceHolder}" 
+            PlaceholderText="{y:Annotate Name, Prompt}" 
             MaxLength="{y:Annotate Name, MaxLength}" 
             InputScope="{y:Annotate Name, BestInputScope}"
             Text="{x:Bind Name, Mode=TwoWay}" />
@@ -96,7 +122,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <TextBox 
             Header="{y:Annotate Username, Header}" 
             Description="{y:Annotate Username, Description}" 
-            PlaceholderText="{y:Annotate Username, PlaceHolder}" 
+            PlaceholderText="{y:Annotate Username, Prompt}" 
             MaxLength="{y:Annotate Username, MaxLength}" 
             InputScope="{y:Annotate Username, BestInputScope}"
             Text="{x:Bind Username, Mode=TwoWay}" />
@@ -105,7 +131,7 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <PasswordBox 
             Header="{y:Annotate Password, Header}" 
             Description="{y:Annotate Password, Description}" 
-            PlaceholderText="{y:Annotate Password, PlaceHolder}" 
+            PlaceholderText="{y:Annotate Password, Prompt}" 
             MaxLength="{y:Annotate Password, MaxLength}" 
             InputScope="{y:Annotate Password, BestInputScope}"
             Password="{x:Bind Password, Mode=TwoWay}" />
@@ -114,14 +140,14 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <DatePicker 
             Header="{y:Annotate DateOfBirth, Header}" 
             Description="{y:Annotate DateOfBirth, Description}" 
-            PlaceholderText="{y:Annotate DateOfBirth, PlaceHolder}" 
+            PlaceholderText="{y:Annotate DateOfBirth, Prompt}" 
             Date="{x:Bind DateOfBirth, Mode=TwoWay}" />
 
         <!-- Body Height -->
         <TextBox 
             Header="{y:Annotate BodyHeight, Header}" 
             Description="{y:Annotate BodyHeight, Description}" 
-            PlaceholderText="{y:Annotate BodyHeight, PlaceHolder}" 
+            PlaceholderText="{y:Annotate BodyHeight, Prompt}" 
             InputScope="{y:Annotate BodyHeight, BestInputScope}" 
             Text="{x:Bind BodyHeight, Mode=TwoWay}" />
         
@@ -129,26 +155,9 @@ This is a sample WinUI 3 sign-in form that uses the AnnotateExtension to bind UI
         <Button Content="Submit" Click="OnSubmit"/>
     </StackPanel>
 </Page>
-``
+```
 
-# Key Features in XAML:
 
-- Header: Binds to the Display(Name) attribute from the ViewModel.
 
-- Description: Binds to the Display(Description) attribute.
 
-- PlaceholderText: Binds to the Display(Prompt) attribute.
 
-- MaxLength: Binds to the MaxLength or StringLength annotation.
-
-- InputScope: Automatically chooses the best input scope based on data types like Email, Password, or custom logic.
-
-# Installation & Usage
-
-- Add the AnnotateExtension package  to your WinUI 3 project. -
-
-- Annotate your ViewModel properties using attributes like [Display], [StringLength], [Range], [Required], etc.
-
- - Use the AnnotateExtension in XAML to bind UI properties like Header, MaxLength, and PlaceholderText directly from the ViewModel.
-
-With this setup, you can automatically keep your UI and data logic in sync using the power of data annotations and the flexibility of WinUI 3.
