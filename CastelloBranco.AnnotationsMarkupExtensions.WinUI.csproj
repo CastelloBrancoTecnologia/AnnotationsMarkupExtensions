@@ -17,20 +17,19 @@
     <Nullable>enable</Nullable>
 	  <Title>CastelloBranco.AnnotationsMarkupExtensions</Title>
 	  <Authors>Castello Branco Tecnologia</Authors>
-	  <PackageId>CastelloBranco.AnnotationsMarkupExtensions</PackageId>
+	  <PackageId>CastelloBranco.AnnotationsMarkupExtensions.WinUI</PackageId>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <Description>Markup Extensions to use DataAnnotations in XAML</Description>
 	  <Copyright>Castello Branco Tecnologia</Copyright>
-	  <AssemblyName>CastelloBranco.AnnotationsMarkupExtensions</AssemblyName>
-	  <RootNamespace>CastelloBranco.AnnotationsMarkupExtensions</RootNamespace>
+	  <AssemblyName>CastelloBranco.AnnotationsMarkupExtensions.WinUI</AssemblyName>
+	  <RootNamespace>CastelloBranco.AnnotationsMarkupExtensions.WinUI</RootNamespace>
 	  <SignAssembly>False</SignAssembly>
 	  <Company>Castello Branco Tecnologia</Company>
 	  <Product>CastelloBranco.AnnotationsMarkupExtensions</Product>
-	  <Version>1.0.2</Version>
-	  <PackageProjectUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions</PackageProjectUrl>
-	  <PackageReadmeFile></PackageReadmeFile>
-	  <RepositoryUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions</RepositoryUrl>
-	  <AssemblyVersion>2410.7.2133.9</AssemblyVersion>
+	  <Version>1.0.3</Version>
+	  <PackageProjectUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions.WinUI</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/CastelloBrancoTecnologia/AnnotationsMarkupExtensions.WinUI</RepositoryUrl>
+	  <AssemblyVersion>2410.8.0122.10</AssemblyVersion>
 
 	  <!--
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
@@ -70,14 +69,6 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CastelloBranco.DataAnnotations" Version="3.0.0.10" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="LICENSE.txt">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
 	</ItemGroup>
 	
 	<Target Name="PushNuGetPackage" AfterTargets="GenerateNuspec">

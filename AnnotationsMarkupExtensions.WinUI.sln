@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastelloBranco.AnnotationsMarkupExtensions", "CastelloBranco.AnnotationsMarkupExtensions.csproj", "{11E9F19F-FBB0-4DF0-8511-86984BD5D3E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastelloBranco.AnnotationsMarkupExtensions.WinUI", "CastelloBranco.AnnotationsMarkupExtensions.WinUI.csproj", "{11E9F19F-FBB0-4DF0-8511-86984BD5D3E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
